@@ -80,4 +80,12 @@ class MoneyAmount
     {
         return abs($this->getAmount()) < 0.005;
     }
+
+    /**
+     * @return bool
+     */
+    public function isNegative(): bool
+    {
+        return $this->getAmount() < 0;
+    }
 }

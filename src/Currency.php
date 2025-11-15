@@ -6,6 +6,7 @@ use unapi\helper\types\Enum;
 
 class Currency extends Enum
 {
+    public $value;
     const AUD = 'AUD'; // Австралийский доллар
     const AZN = 'AZN'; // Азербайджанский манат
     const GBP = 'GBP'; // Фунт стерлингов Соединенного королевства
