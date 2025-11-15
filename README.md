@@ -1,9 +1,9 @@
 # Unapi Money
 
-[![Build Status](https://github.com/xRubin/OpenSky/workflows/CI/badge.svg)](https://github.com/xRubin/OpenSky/actions)
-[![Latest Stable Version](http://poser.pugx.org/rubin/opensky/v)](https://packagist.org/packages/rubin/opensky)
-[![Coverage Status](https://coveralls.io/repos/github/xRubin/OpenSky/badge.svg?branch=master)](https://coveralls.io/github/xRubin/OpenSky?branch=master)
-[![PHP Version Require](http://poser.pugx.org/rubin/opensky/require/php)](https://packagist.org/packages/rubin/opensky)
+[![Build Status](https://github.com/xRubin/unapi-helper-money/workflows/CI/badge.svg)](https://github.com/xRubin/unapi-helper-money/actions)
+[![Latest Stable Version](http://poser.pugx.org/rubin/unapi-helper-money/v)](https://packagist.org/packages/rubin/unapi-helper-money)
+[![Coverage Status](https://coveralls.io/repos/github/xRubin/unapi-helper-money/badge.svg?branch=master)](https://coveralls.io/github/xRubin/unapi-helper-money?branch=master)
+[![PHP Version Require](http://poser.pugx.org/rubin/unapi-helper-money/require/php)](https://packagist.org/packages/rubin/unapi-helper-money)
 
 PHP implementation for the MoneyAmount pattern.
 
