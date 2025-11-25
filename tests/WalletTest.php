@@ -12,7 +12,7 @@ class WalletTest extends TestCase
     public function testCanCreateObject()
     {
         $wallet = new Wallet([
-            new MoneyAmount(20, new Currency(Currency::EUR)),
+            new MoneyAmount(20.0, new Currency(Currency::EUR)),
         ]);
         $money = $wallet->getMoney();
         $this->assertIsArray($money);
@@ -21,15 +21,49 @@ class WalletTest extends TestCase
         $this->assertSame('EUR', $money[0]->getCurrency()->value);
     }
 
+    public function testNoReturnOfZeroValues()
+    {
+        $wallet = new Wallet([
+            new MoneyAmount(20.0, new Currency(Currency::EUR)),
+            new MoneyAmount(0.0, new Currency(Currency::USD)),
+        ]);
+        $money = $wallet->getMoney();
+        $this->assertIsArray($money);
+        $this->assertCount(1, $money);
+        $this->assertInstanceOf(MoneyAmount::class, $money[0]);
+        $this->assertSame('EUR', $money[0]->getCurrency()->value);
+    }
+
+    public function testGetMoneyByCurrencyPositive()
+    {
+        $wallet = new Wallet([
+            new MoneyAmount(10.0, new Currency(Currency::EUR)),
+            new MoneyAmount(20.0, new Currency(Currency::USD)),
+        ]);
+        $result = $wallet->getMoneyByCurrency(new Currency(Currency::USD));
+        $this->assertInstanceOf(MoneyAmount::class, $result);
+        $this->assertSame('USD', $result->getCurrency()->value);
+    }
+
+    public function testGetMoneyByCurrencyNegative()
+    {
+        $wallet = new Wallet([
+            new MoneyAmount(10.0, new Currency(Currency::EUR)),
+            new MoneyAmount(20.0, new Currency(Currency::USD)),
+        ]);
+        $result = $wallet->getMoneyByCurrency(new Currency(Currency::RUB));
+        $this->assertNull($result);
+    }
+
     public function testCanAddAmountWithSameCurrency()
     {
         $wallet = new Wallet([
-            new MoneyAmount(20, new Currency(Currency::EUR)),
+            new MoneyAmount(20.0, new Currency(Currency::EUR)),
         ]);
-        $wallet2 = $wallet->addMoney(
-            new MoneyAmount(5, new Currency(Currency::EUR))
+        $wallet->addMoney(
+            new MoneyAmount(5.0, new Currency(Currency::EUR))
         );
-        $result = $wallet2->getMoneyByCurrency(new Currency(Currency::EUR));
+        $result = $wallet->getMoneyByCurrency(new Currency(Currency::EUR));
         $this->assertSame(25.0, $result->getAmount());
         $this->assertSame('EUR', $result->getCurrency()->value);
     }
@@ -37,21 +71,20 @@ class WalletTest extends TestCase
     public function testCanAddAmountWithDifferentCurrency()
     {
         $wallet = new Wallet([
-            new MoneyAmount(20, new Currency(Currency::EUR)),
+            new MoneyAmount(20.0, new Currency(Currency::EUR)),
         ]);
-        $wallet2 = $wallet->addMoney(
-            new MoneyAmount(5, new Currency(Currency::USD))
+        $wallet->addMoney(
+            new MoneyAmount(5.0, new Currency(Currency::USD))
         );
-        $this->assertCount(1, $wallet->getMoney());
-        $this->assertIsArray($wallet2->getMoney());
-        $this->assertCount(2, $wallet2->getMoney());
+        $this->assertIsArray($wallet->getMoney());
+        $this->assertCount(2, $wallet->getMoney());
     }
 
     public function testNegativeAmountCheck()
     {
         $wallet = new Wallet([
-            new MoneyAmount(20, new Currency(Currency::EUR)),
-            new MoneyAmount(-5, new Currency(Currency::USD)),
+            new MoneyAmount(20.0, new Currency(Currency::EUR)),
+            new MoneyAmount(-5.0, new Currency(Currency::USD)),
         ]);
         $this->assertTrue($wallet->hasNegativeAmount());
     }

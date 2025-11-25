@@ -46,36 +46,34 @@ class Wallet
 
     /**
      * @param MoneyAmount $money
-     * @return Wallet
+     * @return static
      */
     public function addMoney(MoneyAmount $money): Wallet
     {
-        $data = $this->money;
-        foreach ($data as $key => $value) {
+        foreach ($this->money as $key => $value) {
             if ($value->getCurrency()->value === $money->getCurrency()->value) {
-                $data[$key] = $value->add($money);
-                return new Wallet($data);
+                $this->money[$key] = $value->add($money);
+                return $this;
             }
         }
-        $data[] = $money;
-        return new Wallet($data);
+        $this->money[] = $money;
+        return $this;
     }
 
     /**
      * @param MoneyAmount $money
-     * @return Wallet
+     * @return static
      */
     public function subMoney(MoneyAmount $money): Wallet
     {
-        $data = $this->money;
-        foreach ($data as $key => $value) {
+        foreach ($this->money as $key => $value) {
             if ($value->getCurrency()->value === $money->getCurrency()->value) {
-                $data[$key] = $value->sub($money);
-                return new Wallet($data);
+                $this->money[$key] = $value->sub($money);
+                return $this;
             }
         }
-        $data[] = new MoneyAmount(-$money->getAmount(), $money->getCurrency());
-        return new Wallet($data);
+        $this->money[] = new MoneyAmount(-$money->getAmount(), $money->getCurrency());
+        return $this;
     }
 
     /**

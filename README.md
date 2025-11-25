@@ -32,7 +32,7 @@ $wallet = new Wallet([
     new MoneyAmount(20.0, new Currency(Currency::EUR))
     new MoneyAmount(10.0, new Currency(Currency::USD))
 ]);
-$newWallet = $wallet->addMoney(
+$wallet->addMoney(
     new MoneyAmount(5.0, new Currency(Currency::EUR))
 );
 ```
