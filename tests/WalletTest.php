@@ -80,6 +80,35 @@ class WalletTest extends TestCase
         $this->assertCount(2, $wallet->getMoney());
     }
 
+    public function testCanSubAmountWithSameCurrency()
+    {
+        $wallet = new Wallet([
+            new MoneyAmount(20.0, new Currency(Currency::EUR)),
+        ]);
+        $wallet->subMoney(
+            new MoneyAmount(5.0, new Currency(Currency::EUR))
+        );
+        $result = $wallet->getMoneyByCurrency(new Currency(Currency::EUR));
+        $this->assertSame(15.0, $result->getAmount());
+        $this->assertSame('EUR', $result->getCurrency()->value);
+    }
+
+    public function testCanSubAmountWithDifferentCurrency()
+    {
+        $wallet = new Wallet([
+            new MoneyAmount(20.0, new Currency(Currency::EUR)),
+        ]);
+        $wallet->subMoney(
+            new MoneyAmount(5.0, new Currency(Currency::USD))
+        );
+        $this->assertIsArray($wallet->getMoney());
+        $this->assertCount(2, $wallet->getMoney());
+        $this->assertEquals(
+            new MoneyAmount(-5.0, new Currency(Currency::USD)),
+            $wallet->getMoneyByCurrency(new Currency(Currency::USD))
+        );
+    }
+
     public function testNegativeAmountCheck()
     {
         $wallet = new Wallet([

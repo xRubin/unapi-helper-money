@@ -1,9 +1,9 @@
 # Unapi Money
 
 [![Build Status](https://github.com/xRubin/unapi-helper-money/workflows/CI/badge.svg)](https://github.com/xRubin/unapi-helper-money/actions)
-[![Latest Stable Version](http://poser.pugx.org/rubin/unapi-helper-money/v)](https://packagist.org/packages/rubin/unapi-helper-money)
+[![Latest Stable Version](http://poser.pugx.org/unapi/helper-money/v)](https://packagist.org/packages/rubin/unapi-helper-money)
 [![Coverage Status](https://coveralls.io/repos/github/xRubin/unapi-helper-money/badge.svg?branch=master)](https://coveralls.io/github/xRubin/unapi-helper-money?branch=master)
-[![PHP Version Require](http://poser.pugx.org/rubin/unapi-helper-money/require/php)](https://packagist.org/packages/rubin/unapi-helper-money)
+[![PHP Version Require](http://poser.pugx.org/unapi/helper-money/require/php)](https://packagist.org/packages/rubin/unapi-helper-money)
 
 PHP implementation for the MoneyAmount pattern.
 
